@@ -1,11 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+
+  /* Breatpoint variable */
+  --bp-small: 24.15;
+  --bp-medium: 43.73;
+  --bp-large: 60.25;
+  --bp-xlarge: 75;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,7 +22,26 @@
 }
 
 body {
-  margin: 0;
+  margin: auto;
+  max-width: 98em;
   min-height: 100vh;
   background: rgb(208, 213, 221, 0.2);
+}
+
+@media only screen and (max-width: 43.73em) {
+  body {
+    max-width: 98%;
+  }
+}
+
+@media only screen and (max-width: 60.25em) {
+  body {
+    max-width: 95%;
+  }
+}
+
+@media only screen and (max-width: 100em) {
+  body {
+    max-width: 93%;
+  }
 }
