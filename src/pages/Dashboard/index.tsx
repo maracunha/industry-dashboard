@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import { Dropdown, Layout, Menu, Space } from 'antd';
 import {
@@ -7,9 +8,13 @@ import {
   CalendarOutlined,
   DownOutlined,
 } from '@ant-design/icons';
+
 import View from '../View';
-import type { MenuProps } from 'antd';
 import styles from './styles.module.css';
+import Status from '../Status';
+import WorkOrders from '../WorkOrders';
+
+import type { MenuProps } from 'antd';
 
 const { Header, Content } = Layout;
 
@@ -31,12 +36,12 @@ const users: MenuProps['items'] = [
 const items: MenuProps['items'] = [
   {
     label: 'Service Order',
-    key: 'services',
+    key: 'workorders',
     icon: <CalendarOutlined />,
   },
   {
     label: 'Over View',
-    key: 'view',
+    key: 'dashboard',
     icon: <AppstoreOutlined />,
   },
   {
@@ -47,10 +52,14 @@ const items: MenuProps['items'] = [
 ];
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   const [current, setCurrent] = useState('view');
 
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
+    navigate(`/${e.key}`);
+
     setCurrent(e.key);
   };
 
@@ -83,7 +92,11 @@ function Dashboard() {
         items={items}
       />
       <Content>
-        <View />
+        <Routes>
+          <Route path="/dashboard" element={<View />} />
+          <Route path="/status" element={<Status />} />
+          <Route path="/workorders" element={<WorkOrders />} />
+        </Routes>
       </Content>
     </Layout>
   );
