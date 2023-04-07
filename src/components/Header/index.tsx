@@ -4,12 +4,13 @@ import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 
 import { useCompaniesList, useUnitsList, useUsersList } from '../../services/queries';
 import { User } from '../../services/inderfaces';
-import { useState } from 'react';
+import { useUserSlice } from '../../services/store';
+import { useEffect, useState } from 'react';
 
 const { Header: AntdHeader } = Layout;
 const { Text } = Typography;
 
-function bla(users: User[]): MenuItemType[] {
+function createUserList(users: User[]): MenuItemType[] {
   return users.map((user) => {
     return {
       label: user.name,
@@ -19,20 +20,29 @@ function bla(users: User[]): MenuItemType[] {
 }
 
 function Header() {
-  const [user, setUser] = useState('');
+  const user = useUserSlice((state) => state.user);
+  const setUser = useUserSlice((state) => state.setUser);
 
   const [companies] = useCompaniesList();
   const [users] = useUsersList();
   const [units] = useUnitsList();
-  const companyName = companies[0]?.name ?? '';
 
-  console.log({ users, units });
+  useEffect(() => {
+    if (!user) {
+      setUser(users[0]);
+    }
+  }, [users]);
 
-  const items = bla(users);
+  const companyName = companies.find((c) => c.id === user?.companyId)?.name ?? '';
+  const unitName = units.find((c) => c.id === user?.unitId)?.name ?? '';
+  const items = createUserList(users);
 
   const onClick = ({ key }: { key: string }) => {
-    const name = items?.find((i) => i?.key == key)?.label as string;
+    const name = users.find((user) => user.id == +key);
 
+    if (!name) {
+      return;
+    }
     setUser(name);
   };
 
@@ -44,10 +54,10 @@ function Header() {
         </a>
       </span>
       <div className="flex justify-between w-full">
-        <span className="ml-8 text-white">units</span>
+        <span className="ml-8 text-white">{unitName}</span>
         <Dropdown menu={{ items, onClick }}>
           <Space className="text-white">
-            {user}
+            {user?.name}
             <DownOutlined />
           </Space>
         </Dropdown>
