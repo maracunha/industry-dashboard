@@ -2,7 +2,11 @@ import { Divider } from 'antd';
 import DetailCard from '../../components/DetailCard';
 import InfoCard from '../../components/InfoCard';
 
-function View() {
+function DashBoard() {
+// import { useAssetsList, useWorkordersList } from '../../services/queries';
+  // const [assets, status] = useAssetsList();
+  // const [works] = useWorkordersList();
+
   return (
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-2">
@@ -26,4 +30,4 @@ function View() {
   );
 }
 
-export default View;
+export default DashBoard;
