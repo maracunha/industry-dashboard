@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { Dropdown, Layout, Menu, Space } from 'antd';
+import { Layout, Menu } from 'antd';
 import {
   AppstoreOutlined,
   DashboardOutlined,
   CalendarOutlined,
-  DownOutlined,
 } from '@ant-design/icons';
 
 import View from '../View';
@@ -15,23 +14,10 @@ import Status from '../Status';
 import WorkOrders from '../WorkOrders';
 
 import type { MenuProps } from 'antd';
+// import { useAssetsList, useWorkordersList } from '../../services/queries';
+import Header from '../../components/Header';
 
-const { Header, Content } = Layout;
-
-const users: MenuProps['items'] = [
-  {
-    label: 'Maria',
-    key: 'user1',
-  },
-  {
-    label: 'Jon tra vocta',
-    key: 'user2',
-  },
-  {
-    label: 'Coisa lindo',
-    key: 'user3',
-  },
-];
+const { Content } = Layout;
 
 const items: MenuProps['items'] = [
   {
@@ -53,36 +39,19 @@ const items: MenuProps['items'] = [
 
 function Dashboard() {
   const navigate = useNavigate();
+  // const [assets, status] = useAssetsList();
+  // const [works] = useWorkordersList();
 
   const [current, setCurrent] = useState('view');
 
   const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
     navigate(`/${e.key}`);
-
     setCurrent(e.key);
   };
 
   return (
     <Layout>
-      <Header className={styles.header}>
-        <span className="w-44">
-          <a href="/">
-            <h1>The Best Company</h1>
-          </a>
-        </span>
-        <div className="justify-between w-full">
-          <span className="ml-8">units</span>
-          <Dropdown menu={{ items }}>
-            <a onClick={(e) => e.preventDefault()}>
-              <Space>
-                Jose Maria
-                <DownOutlined />
-              </Space>
-            </a>
-          </Dropdown>
-        </div>
-      </Header>
+      <Header />
       <Menu
         className={styles.menu}
         onClick={onClick}
