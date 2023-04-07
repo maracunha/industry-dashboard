@@ -1,23 +1,13 @@
+import { useEffect} from 'react';
 import { Dropdown, Layout, Space, Typography } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 
 import { useCompaniesList, useUnitsList, useUsersList } from '../../services/queries';
-import { User } from '../../services/inderfaces';
-import { useUserSlice } from '../../services/store';
-import { useEffect, useState } from 'react';
+import { useUserSlice } from '../../services/useUserSlice';
+import { createUserList } from './helper';
 
 const { Header: AntdHeader } = Layout;
 const { Text } = Typography;
-
-function createUserList(users: User[]): MenuItemType[] {
-  return users.map((user) => {
-    return {
-      label: user.name,
-      key: user.id,
-    };
-  }, []);
-}
 
 function Header() {
   const user = useUserSlice((state) => state.user);
