@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
-import View from '../View';
+import DashBoard from '../DashBoard';
 import styles from './styles.module.css';
 import Status from '../Status';
 import WorkOrders from '../WorkOrders';
@@ -35,8 +35,8 @@ function Dashboard() {
       />
       <Content>
         <Routes>
-          <Route path="/" element={<View />} />
-          <Route path="/dashboard" element={<View />} />
+          <Route path="/" element={<DashBoard />} />
+          <Route path="/dashboard" element={<DashBoard />} />
           <Route path="/status" element={<Status />} />
           <Route path="/workorders" element={<WorkOrders />} />
         </Routes>

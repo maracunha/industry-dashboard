@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import { App as AntdApp } from 'antd';
-import Dashboard from './pages/Dashboard';
+import Main from './pages/Main';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -17,7 +17,7 @@ const App = () => {
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AntdApp>
-          <Dashboard />
+          <Main />
         </AntdApp>
       </QueryClientProvider>
     </BrowserRouter>
