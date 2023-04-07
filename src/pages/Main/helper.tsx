@@ -4,12 +4,12 @@ import type { MenuProps } from 'antd';
 
 export const items: MenuProps['items'] = [
   {
-    label: 'Service Order',
+    label: 'Service Orders',
     key: 'workorders',
     icon: <CalendarOutlined />,
   },
   {
-    label: 'Over View',
+    label: 'Dashboard',
     key: 'dashboard',
     icon: <AppstoreOutlined />,
   },

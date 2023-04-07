@@ -1,11 +1,12 @@
 import { Divider } from 'antd';
 import DetailCard from '../../components/DetailCard';
 import InfoCard from '../../components/InfoCard';
+import { useAssetsList } from '../../services/queries';
 
 function DashBoard() {
-// import { useAssetsList, useWorkordersList } from '../../services/queries';
-  // const [assets, status] = useAssetsList();
-  // const [works] = useWorkordersList();
+  const [assets, status] = useAssetsList();
+
+  console.log({ assets, status})
 
   return (
     <div>

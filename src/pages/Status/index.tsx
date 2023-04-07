@@ -1,5 +1,13 @@
+import { Asset } from '../../services/inderfaces';
+
 function Status() {
-  return <div>status</div>
+  const asset: Asset = null;
+
+  if (!asset) {
+    return <div>Choose one asset at Dashboard</div>;
+  }
+
+  return <div>status</div>;
 }
 
 export default Status;
