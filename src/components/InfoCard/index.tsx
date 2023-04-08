@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Card, Empty } from 'antd';
 import Title from 'antd/es/typography/Title';
 import {
   ExclamationCircleOutlined,
@@ -8,7 +8,17 @@ import {
 } from '@ant-design/icons';
 import { AssetsStatus } from '../../services/inderfaces';
 
-function InfoCard({ status }: {status: AssetsStatus}) {
+function InfoCard({ status }: { status: AssetsStatus }) {
+  const isEmpty: boolean =
+    !status.inAlert &&
+    !status.inDowntime &&
+    !status.inOperation &&
+    !status.plannedStop &&
+    !status.notplannetStop;
+
+  if (isEmpty) {
+    return <Empty />;
+  }
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-5 gap-2">
