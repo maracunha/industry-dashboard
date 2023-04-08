@@ -1,25 +1,34 @@
-import { Card } from 'antd';
+import { Link } from 'react-router-dom';
+import { Card, Descriptions } from 'antd';
 import styles from './styles.module.css';
 
 interface DetailCardProp {
   name: string;
   model: string;
-  status: 'inAlert' | 'inOperation' | 'inDownTime' | 'notplannetStop' | 'plannedStop';
-  time: number;
+  status: 'inAlert' | 'inOperation' | 'inDowntime' | 'notplannetStop' | 'plannedStop';
   healthScore: number;
+  id: number;
 }
 
-function DetailCard({ name, model, status = 'inAlert', time, healthScore }: DetailCardProp) {
-
+function DetailCard({ name, model, status, healthScore, id }: DetailCardProp) {
   return (
-    <Card title={name} extra={<a href="#">Status</a>} bodyStyle={{ padding: 0 }} headStyle={{ textAlign: 'center' }}>
-      <div className="flex flex-col text-center mt-6 gap-6">
-        <p>Model: {model} </p>
-        <p>Heath Score: {healthScore}%</p>
-        <div className={styles[status]}>
-          <span>{status}</span>
-          <span>{time}</span>
-        </div>
+    <Card
+      title={name}
+      extra={
+        <Link to="/status" state={id} className={styles.button}>
+          View Status
+        </Link>
+      }
+      bodyStyle={{ padding: 0 }}
+      headStyle={{ textAlign: 'center' }}
+    >
+      <Descriptions column={1} className={styles.description}>
+        <Descriptions.Item label="Model: ">{model}</Descriptions.Item>
+        <Descriptions.Item label="Healh Score: ">{healthScore}</Descriptions.Item>
+      </Descriptions>
+
+      <div className={styles[status]}>
+        <span>{status}</span>
       </div>
     </Card>
   );

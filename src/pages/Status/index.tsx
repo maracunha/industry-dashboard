@@ -1,10 +1,14 @@
+import { Empty } from 'antd';
+import { useLocation } from 'react-router-dom';
 import { Asset } from '../../services/inderfaces';
 
 function Status() {
-  const asset: Asset = null;
+  const { state } = useLocation();
 
-  if (!asset) {
-    return <div>Choose one asset at Dashboard</div>;
+  console.log ( state )
+
+  if (!state) {
+    return <Empty />;
   }
 
   return <div>status</div>;

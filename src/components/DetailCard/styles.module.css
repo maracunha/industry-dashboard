@@ -1,6 +1,6 @@
 /* Declare the base here */
 .base-status {
-  @apply flex text-lg justify-between px-8 items-center h-12 border-2 rounded-t-lg;
+  @apply flex text-lg justify-center px-8 items-center h-12 border-2 rounded-t-lg;
 }
 
 /* Here we use base-status and styled according to prop status that we
@@ -14,7 +14,7 @@
   @apply base-status bg-emerald-200 text-emerald-700 border-emerald-700;
 }
 
-.inDownTime {
+.inDowntime {
   @apply base-status bg-stone-200 text-stone-700 border-stone-700;
 }
 
@@ -24,4 +24,13 @@
 
 .plannedStop {
   @apply base-status bg-cyan-200 text-cyan-700 border-cyan-700;
+}
+
+.description {
+  @apply ml-8 mt-4;
+}
+
+.button {
+  @apply rounded-lg bg-blue-400 py-2 px-3 text-xs font-bold text-white;
+  @apply shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 hover:text-white;
 }

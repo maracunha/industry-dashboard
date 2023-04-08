@@ -2,11 +2,25 @@ import { Divider } from 'antd';
 import DetailCard from '../../components/DetailCard';
 import InfoCard from '../../components/InfoCard';
 import { useAssetsList } from '../../services/queries';
+import { useUserSlice } from '../../services/useUserSlice';
 
 function DashBoard() {
+  const user = useUserSlice((state) => state.user);
+  const userUnitId = user?.unitId;
+  const userId = user?.id;
+
   const [assets, status] = useAssetsList();
 
-  console.log({ assets, status})
+  if (!userId) {
+    // return some nice thing here
+    return;
+  }
+
+  const foo = assets.filter((asset) => asset.assignedUserIds.includes(userId));
+
+  if (!foo) return;
+
+  console.log({ assets, status, userUnitId, userId, foo });
 
   return (
     <div>
@@ -21,11 +35,15 @@ function DashBoard() {
       <Divider orientation="left" />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-        <DetailCard name="Bomba" model="bla bal" status="inAlert" time={3} healthScore={20} />
-        <DetailCard name="Man" model="bla bal" status="inOperation" time={3} healthScore={20} />
-        <DetailCard name="Maria" model="bla bal" status="plannedStop" time={3} healthScore={20} />
-        <DetailCard name="Bom" model="bla bal" status="notplannetStop" time={3} healthScore={20} />
-        <DetailCard name="Boeee" model="bla bal" status="inDownTime" time={3} healthScore={20} />
+        {foo.map((asset) => (
+          <DetailCard
+            name={asset.name}
+            model={asset.model}
+            status={asset.status}
+            time={3}
+            healthScore={20}
+          />
+        ))}
       </div>
     </div>
   );
