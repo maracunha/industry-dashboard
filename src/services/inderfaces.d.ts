@@ -18,7 +18,7 @@ export interface Asset {
   name: string
   sensors: string[]
   specifications: Specifications
-  status: string
+  status: 'inAlert' | 'inOperation' | 'inDowntime' | 'notplannetStop' | 'plannedStop';
   unitId: number
 }
 

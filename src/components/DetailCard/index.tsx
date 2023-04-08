@@ -5,12 +5,12 @@ import styles from './styles.module.css';
 interface DetailCardProp {
   name: string;
   model: string;
-  status: 'inAlert' | 'inOperation' | 'inDowntime' | 'notplannetStop' | 'plannedStop';
+  cardStatus: 'inAlert' | 'inOperation' | 'inDowntime' | 'notplannetStop' | 'plannedStop';
   healthScore: number;
   id: number;
 }
 
-function DetailCard({ name, model, status, healthScore, id }: DetailCardProp) {
+function DetailCard({ name, model, cardStatus, healthScore, id }: DetailCardProp) {
   return (
     <Card
       title={name}
@@ -27,9 +27,10 @@ function DetailCard({ name, model, status, healthScore, id }: DetailCardProp) {
         <Descriptions.Item label="Healh Score: ">{healthScore}</Descriptions.Item>
       </Descriptions>
 
-      <div className={styles[status]}>
-        <span>{status}</span>
+      <div className={styles[cardStatus]}>
+        <span>{cardStatus}</span>
       </div>
+
     </Card>
   );
 }
