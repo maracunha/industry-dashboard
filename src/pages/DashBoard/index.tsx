@@ -37,7 +37,7 @@ function DashBoard() {
             name={asset.name}
             model={asset.model}
             cardStatus={asset.status}
-            healthScore={20}
+            healthScore={asset.healthscore}
             id={asset.id}
           />
         ))}

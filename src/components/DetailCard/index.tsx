@@ -24,7 +24,7 @@ function DetailCard({ name, model, cardStatus, healthScore, id }: DetailCardProp
     >
       <Descriptions column={1} className={styles.description}>
         <Descriptions.Item label="Model: ">{model}</Descriptions.Item>
-        <Descriptions.Item label="Healh Score: ">{healthScore}</Descriptions.Item>
+        <Descriptions.Item label="Healh Score: ">{healthScore} %</Descriptions.Item>
       </Descriptions>
 
       <div className={styles[cardStatus]}>
