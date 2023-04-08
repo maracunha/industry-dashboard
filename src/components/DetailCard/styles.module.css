@@ -27,7 +27,7 @@
 }
 
 .description {
-  @apply ml-8 mt-4;
+  @apply ml-8 my-12;
 }
 
 .button {
