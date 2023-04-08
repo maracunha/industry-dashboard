@@ -6,39 +6,52 @@ import {
   PauseCircleOutlined,
   StopOutlined,
 } from '@ant-design/icons';
+import { AssetsStatus } from '../../services/inderfaces';
 
-function InfoCard({ status = 'inAlert' }) {
-  const info = {
-    inAlert: {
-      title: 'Alert',
-      icon: <ExclamationCircleOutlined style={{ color: 'red', fontSize: 'xx-large' }} />,
-    },
-    inOperation: {
-      title: 'Operation',
-      icon: <CheckCircleOutlined style={{ color: 'green', fontSize: 'xx-large' }} />,
-    },
-    inDownTime: {
-      title: 'Down Time',
-      icon: <StopOutlined style={{ color: 'gray', fontSize: 'xx-large' }} />,
-    },
-    notplannetStop: {
-      title: 'Not Planned Stop',
-      icon: <PauseCircleOutlined style={{ color: 'darkcyan', fontSize: 'xx-large' }} />,
-    },
-    plannedStop: {
-      title: 'Planned Stop',
-      icon: <PauseCircleOutlined style={{ color: 'orange', fontSize: 'xx-large' }} />,
-    },
-  }[status];
+function InfoCard({ status }: {status: AssetsStatus}) {
 
   return (
-    <Card className="flex justify-center">
-      <Title level={4}>{info?.title}</Title>
-      <div className="flex flex-row items-center gap-2 justify-center text-2xl">
-        {info?.icon}
-        <span className="font-bold">09</span>
-      </div>
-    </Card>
+    <div className="grid grid-cols-2 lg:grid-cols-5 gap-2">
+      <Card className="flex justify-center">
+        <Title level={4}>Operation</Title>
+        <div className="flex flex-row items-center gap-2 justify-center text-2xl">
+          <CheckCircleOutlined style={{ color: 'green', fontSize: 'xx-large' }} />
+          <span className="font-bold">{status.inOperation}</span>
+        </div>
+      </Card>
+
+      <Card className="flex justify-center">
+        <Title level={4}>In Alert</Title>
+        <div className="flex flex-row items-center gap-2 justify-center text-2xl">
+          <ExclamationCircleOutlined style={{ color: 'red', fontSize: 'xx-large' }} />
+          <span className="font-bold">{status.inAlert}</span>
+        </div>
+      </Card>
+
+      <Card className="flex justify-center">
+        <Title level={4}>Planned Stop</Title>
+        <div className="flex flex-row items-center gap-2 justify-center text-2xl">
+          <PauseCircleOutlined style={{ color: 'orange', fontSize: 'xx-large' }} />
+          <span className="font-bold">{status.plannedStop}</span>
+        </div>
+      </Card>
+
+      <Card className="flex justify-center">
+        <Title level={4}>No Planned Stop</Title>
+        <div className="flex flex-row items-center gap-2 justify-center text-2xl">
+          <PauseCircleOutlined style={{ color: 'darkcyan', fontSize: 'xx-large' }} />
+          <span className="font-bold">{status.notplannetStop}</span>
+        </div>
+      </Card>
+
+      <Card className="flex justify-center">
+        <Title level={4}>Downtime</Title>
+        <div className="flex flex-row items-center gap-2 justify-center text-2xl">
+          <StopOutlined style={{ color: 'gray', fontSize: 'xx-large' }} />
+          <span className="font-bold">{status.inDowntime}</span>
+        </div>
+      </Card>
+    </div>
   );
 }
 

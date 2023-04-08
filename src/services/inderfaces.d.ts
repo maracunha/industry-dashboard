@@ -74,3 +74,10 @@ export interface Checklist {
   task: string
 }
 
+export interface AssetsStatus {
+  inOperation: number;
+  inAlert: number;
+  plannedStop: number;
+  notplannetStop: number;
+  inDowntime: number;
+}
