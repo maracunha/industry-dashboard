@@ -1,10 +1,13 @@
+import { useMemo } from 'react';
 import { Divider, Empty } from 'antd';
+
+import DashboardSkeleton from './DashboardSkeleton';
 import DetailCard from '../../components/DetailCard';
 import InfoCard from '../../components/InfoCard';
 import { Asset } from '../../services/inderfaces';
+
 import { useAssetsList } from '../../services/queries';
 import { useUserSlice } from '../../services/useUserSlice';
-import DashboardSkeleton from './DashboardSkeleton';
 import { assetsStatus } from './helper';
 
 function DashBoard() {
@@ -17,8 +20,12 @@ function DashBoard() {
     return <Empty />;
   }
 
-  const userAssets: Asset[] = assets.filter((asset) => asset.assignedUserIds.includes(userId));
-  const status = assetsStatus(userAssets);
+  const userAssets: Asset[] = useMemo(
+    () => assets.filter((asset) => asset.assignedUserIds.includes(userId)),
+    [assets, userId],
+  );
+
+  const status = useMemo(() => assetsStatus(userAssets), [userAssets]);
 
   if (reqStatus == 'loading') {
     return <DashboardSkeleton />;
