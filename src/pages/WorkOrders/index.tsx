@@ -1,10 +1,32 @@
+import { useMemo } from 'react';
+import { Empty } from 'antd';
+
 import { useWorkordersList } from '../../services/queries';
+import { Workorder } from '../../services/interfaces';
+import WorkOrderCard from '../../components/WorkOrderCard';
 
-function WorkOrders() {
-  const [works, status] = useWorkordersList();
-  console.log({works, status })
+function WorkOrders({ userId }: { userId: number }) {
+  const [works] = useWorkordersList();
 
-  return <div>work orders</div>
+  const userWorkOrders: Workorder[] = useMemo(
+    () => works.filter((work) => work.assignedUserIds.includes(userId)),
+    [works, userId],
+  );
+
+  if (userWorkOrders.length == 0) {
+    return <Empty />;
+  }
+
+  console.log({userWorkOrders })
+
+  return (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+        {userWorkOrders.map((orders) => (
+          <WorkOrderCard orders={orders}/>
+        ))}
+      </div>
+  );
+
 }
 
 export default WorkOrders;
