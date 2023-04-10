@@ -3,6 +3,8 @@ import { Avatar, Card, Descriptions, Empty } from 'antd';
 
 import { useAssetsList } from '../../services/queries';
 import styles from './styles.module.css';
+import { optionsChartPie } from './chartsHelper';
+import Chart from '../../components/Chart';
 
 function Status() {
   const { state } = useLocation();
@@ -10,16 +12,9 @@ function Status() {
 
   const [asset] = assets.filter((asset) => asset.id == state);
 
-  console.log(asset, asset);
-
   if (!state || !asset) {
     return <Empty />;
   }
-
-  const gridStyle = {
-    width: '25%',
-    textAlign: 'center',
-  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8">
@@ -34,23 +29,15 @@ function Status() {
             <Descriptions.Item label="Healh Score: ">{asset.healthscore} %</Descriptions.Item>
             <Descriptions.Item label="Assened Users: ">
               {asset.assignedUserIds.map((u) => (
-                <Avatar>{u}</Avatar>
+                <Avatar key={u}>{u}</Avatar>
               ))}
             </Descriptions.Item>
           </Descriptions>
         </Card>
       </div>
       <div className="col-span-2">
-        <Card title="Card Title">
-          <Card.Grid style={gridStyle}>Content</Card.Grid>
-          <Card.Grid hoverable={false} style={gridStyle}>
-            Content
-          </Card.Grid>
-          <Card.Grid style={gridStyle}>Content</Card.Grid>
-          <Card.Grid style={gridStyle}>Content</Card.Grid>
-          <Card.Grid style={gridStyle}>Content</Card.Grid>
-          <Card.Grid style={gridStyle}>Content</Card.Grid>
-          <Card.Grid style={gridStyle}>Content</Card.Grid>
+        <Card>
+          <Chart options={optionsChartPie} />
         </Card>
       </div>
     </div>
