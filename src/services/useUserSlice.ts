@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware'
-import { User } from './inderfaces';
+import { User } from './interfaces';
 
 interface State {
   user: User | null;

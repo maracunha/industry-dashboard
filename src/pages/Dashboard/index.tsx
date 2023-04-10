@@ -4,7 +4,7 @@ import { Divider, Empty } from 'antd';
 import DashboardSkeleton from './DashboardSkeleton';
 import DetailCard from '../../components/DetailCard';
 import InfoCard from '../../components/InfoCard';
-import { Asset } from '../../services/inderfaces';
+import { Asset } from '../../services/interfaces';
 
 import { useAssetsList } from '../../services/queries';
 import { useUserSlice } from '../../services/useUserSlice';

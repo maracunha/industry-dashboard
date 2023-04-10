@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
-import DashBoard from '../DashBoard';
+import Dashboard from '../Dashboard';
 import styles from './styles.module.css';
 import Status from '../Status';
 import WorkOrders from '../WorkOrders';
@@ -14,7 +14,7 @@ import type { MenuProps } from 'antd';
 
 const { Content } = Layout;
 
-function Dashboard() {
+function Main() {
   const [current, setCurrent] = useState('dashboard');
   const navigate = useNavigate();
 
@@ -35,8 +35,8 @@ function Dashboard() {
       />
       <Content>
         <Routes>
-          <Route path="/" element={<DashBoard />} />
-          <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/status" element={<Status />} />
           <Route path="/workorders" element={<WorkOrders />} />
         </Routes>
@@ -45,4 +45,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Main;

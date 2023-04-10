@@ -1,4 +1,4 @@
-import { Asset, AssetsStatus } from '../../services/inderfaces';
+import { Asset, AssetsStatus } from '../../services/interfaces';
 
 export function assetsStatus(assets: Asset[]): AssetsStatus {
   const status = {

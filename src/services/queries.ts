@@ -1,6 +1,6 @@
 import { QueryStatus, useQuery } from '@tanstack/react-query';
 import { fetchApi } from './api';
-import type { Asset, Company, Unit, User, Workorder } from './inderfaces';
+import type { Asset, Company, Unit, User, Workorder } from './interfaces';
 
 export function useAssetsList() {
   const results = useQuery(['assets'], { queryFn: () => fetchApi('assets') });
