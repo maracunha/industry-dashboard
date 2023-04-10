@@ -6,7 +6,7 @@ import {
   PauseCircleOutlined,
   StopOutlined,
 } from '@ant-design/icons';
-import { AssetsStatus } from '../../services/inderfaces';
+import { AssetsStatus } from '../../services/interfaces';
 
 function InfoCard({ status }: { status: AssetsStatus }) {
   const isEmpty: boolean =
