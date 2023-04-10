@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
+import { useUserSlice } from '../../services/useUserSlice';
 import Dashboard from '../Dashboard';
-import styles from './styles.module.css';
 import Status from '../Status';
 import WorkOrders from '../WorkOrders';
-
 import Header from '../../components/Header';
-import { items } from './helper';
 
 import type { MenuProps } from 'antd';
+
+import { items } from './helper';
+import styles from './styles.module.css';
 
 const { Content } = Layout;
 
@@ -18,6 +19,9 @@ function Main() {
   const [current, setCurrent] = useState('dashboard');
   const navigate = useNavigate();
   const location = useLocation();
+
+  const user = useUserSlice((state) => state.user);
+  const userId = user?.id ?? 0;
 
   const { pathname } = location;
 
@@ -42,10 +46,10 @@ function Main() {
       />
       <Content>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard userId={userId}/>} />
+          <Route path="/dashboard" element={<Dashboard userId={userId}/>} />
           <Route path="/status" element={<Status />} />
-          <Route path="/workorders" element={<WorkOrders />} />
+          <Route path="/workorders" element={<WorkOrders userId={userId}/>} />
         </Routes>
       </Content>
     </Layout>

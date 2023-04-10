@@ -7,13 +7,9 @@ import InfoCard from '../../components/InfoCard';
 import { Asset } from '../../services/interfaces';
 
 import { useAssetsList } from '../../services/queries';
-import { useUserSlice } from '../../services/useUserSlice';
 import { assetsStatus } from './helper';
 
-function DashBoard() {
-  const user = useUserSlice((state) => state.user);
-  const userId = user?.id;
-
+function DashBoard({ userId }: { userId: number }) {
   const [assets, reqStatus] = useAssetsList();
 
   if (!userId) {
