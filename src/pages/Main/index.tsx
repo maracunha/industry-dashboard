@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 
 import Dashboard from '../Dashboard';
@@ -17,11 +17,18 @@ const { Content } = Layout;
 function Main() {
   const [current, setCurrent] = useState('dashboard');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { pathname } = location;
 
   const onClick: MenuProps['onClick'] = (e) => {
     navigate(`/${e.key}`);
     setCurrent(e.key);
   };
+
+  useEffect(()=> {
+    setCurrent(pathname.substring(1))
+    },[pathname])
 
   return (
     <Layout>

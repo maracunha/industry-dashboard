@@ -1,4 +1,5 @@
 import { useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Dropdown, Layout, Space, Typography } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
@@ -10,6 +11,7 @@ const { Header: AntdHeader } = Layout;
 const { Text } = Typography;
 
 function Header() {
+  const navigate = useNavigate();
   const user = useUserSlice((state) => state.user);
   const setUser = useUserSlice((state) => state.setUser);
 
@@ -34,6 +36,8 @@ function Header() {
       return;
     }
     setUser(name);
+    navigate('/dashboard');
+
   };
 
   return (
