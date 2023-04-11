@@ -22,13 +22,10 @@ function WorkOrders({ userId }: { userId: number }) {
     return <Empty />;
   }
 
-
-  console.log({userWorkOrders })
-
   return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
         {userWorkOrders.map((orders) => (
-          <WorkOrderCard orders={orders}/>
+          <WorkOrderCard key={orders.id} orders={orders}/>
         ))}
       </div>
   );

@@ -1,26 +1,43 @@
-import { Card, Descriptions } from 'antd';
-import styles from './styles.module.css';
+import { Avatar, Card, Descriptions, Tag } from 'antd';
+import Table from './Table';
 import { Workorder } from '../../services/interfaces';
-
-const { Meta } = Card;
 
 interface WorkOrderCardProp {
   orders: Workorder;
 }
 
 function WorkOrderCard({ orders }: WorkOrderCardProp) {
-  const { title, description, status, priority } = orders;
+  const { id, title, description, status, priority, assignedUserIds, checklist } = orders;
+
+  const statusColor = {
+    completed: 'green',
+    'in progress': 'blue',
+  }[status];
 
   return (
-    <Card title={title} bodyStyle={{ padding: 0 }} headStyle={{ textAlign: 'center' }}>
-      <Meta description={description} />
-      <Descriptions column={1} className={styles.description}>
+    <Card
+      title={title}
+      extra={
+        <Tag color={statusColor} className="uppercase">
+          {status}
+        </Tag>
+      }
+      bodyStyle={{ padding: 0 }}
+      headStyle={{ textAlign: 'center' }}
+    >
+      <Descriptions title={description} column={1} className="mt-6 mx-12">
         <Descriptions.Item label="Priority: ">{priority}</Descriptions.Item>
-      </Descriptions>
 
-      <div className={styles[status]}>
-        <span>{status}</span>
-      </div>
+        <Descriptions.Item label="Checklist: ">
+          <Table checklist={checklist} id={id} />
+        </Descriptions.Item>
+
+        <Descriptions.Item label="Assened Users: ">
+          {assignedUserIds.map((u) => (
+            <Avatar key={`${id}-${u}`}>{u}</Avatar>
+          ))}
+        </Descriptions.Item>
+      </Descriptions>
     </Card>
   );
 }
