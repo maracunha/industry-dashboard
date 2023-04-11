@@ -37,6 +37,7 @@ const options = [
   },
 ];
 
+
 function Table({ checklist, id }: TableProp) {
 
 // Create a simple slider, to show if the task was done or not,

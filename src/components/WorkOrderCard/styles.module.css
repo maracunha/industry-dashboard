@@ -1,0 +1,5 @@
+.assigned {
+  & div {
+    @apply flex items-center;
+  }
+}
