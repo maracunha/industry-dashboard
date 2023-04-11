@@ -1,6 +1,6 @@
 import { useUsersList } from '../services/queries';
 
-export function useUSerAvatar(usersId: number[]): string[] {
+export function useUSerAvatar(usersId: number[] = []): string[] {
   let names = [];
   const [users] = useUsersList();
 

@@ -1,16 +1,18 @@
 import { useLocation } from 'react-router-dom';
-import { Avatar, Card, Descriptions, Empty } from 'antd';
+import { Avatar, Card, Descriptions, Empty, Tooltip } from 'antd';
 
 import { useAssetsList } from '../../services/queries';
 import styles from './styles.module.css';
 import { optionsChartPie } from './chartsHelper';
 import Chart from '../../components/Chart';
+import { useUSerAvatar } from '../../hooks/useUserAvatar';
 
 function Status() {
   const { state } = useLocation();
   const [assets] = useAssetsList();
-
   const [asset] = assets.filter((asset) => asset.id == state);
+
+  const avatars = useUSerAvatar(asset?.assignedUserIds);
 
   if (!state || !asset) {
     return <Empty />;
@@ -27,9 +29,11 @@ function Status() {
               {asset.specifications.maxTemp} c
             </Descriptions.Item>
             <Descriptions.Item label="Healh Score: ">{asset.healthscore} %</Descriptions.Item>
-            <Descriptions.Item label="Assened Users: ">
-              {asset.assignedUserIds.map((u) => (
-                <Avatar key={u}>{u}</Avatar>
+            <Descriptions.Item label="Assigned Users" className={styles.assigned}>
+              {avatars.map((a) => (
+                <Tooltip key={`${asset.id}-${a}`} title={a} placement="top" className="cursor-help">
+                  <Avatar className="mr-2">{a.charAt(0)}</Avatar>
+                </Tooltip>
               ))}
             </Descriptions.Item>
           </Descriptions>
