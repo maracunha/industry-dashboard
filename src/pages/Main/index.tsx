@@ -30,9 +30,12 @@ function Main() {
     setCurrent(e.key);
   };
 
-  useEffect(()=> {
-    setCurrent(pathname.substring(1))
-    },[pathname])
+  useEffect(() => {
+    const path = pathname.substring(1);
+    if (path) {
+      setCurrent(path);
+    }
+  }, [pathname]);
 
   return (
     <Layout>
@@ -46,10 +49,10 @@ function Main() {
       />
       <Content>
         <Routes>
-          <Route path="/" element={<Dashboard userId={userId}/>} />
-          <Route path="/dashboard" element={<Dashboard userId={userId}/>} />
+          <Route path="/" element={<Dashboard userId={userId} />} />
+          <Route path="/dashboard" element={<Dashboard userId={userId} />} />
           <Route path="/status" element={<Status />} />
-          <Route path="/workorders" element={<WorkOrders userId={userId}/>} />
+          <Route path="/workorders" element={<WorkOrders userId={userId} />} />
         </Routes>
       </Content>
     </Layout>

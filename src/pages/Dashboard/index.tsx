@@ -12,9 +12,6 @@ import { assetsStatus } from './helper';
 function DashBoard({ userId }: { userId: number }) {
   const [assets, reqStatus] = useAssetsList();
 
-  if (!userId) {
-    return <Empty />;
-  }
 
   const userAssets: Asset[] = useMemo(
     () => assets.filter((asset) => asset.assignedUserIds.includes(userId)),
@@ -25,6 +22,10 @@ function DashBoard({ userId }: { userId: number }) {
 
   if (reqStatus == 'loading') {
     return <DashboardSkeleton />;
+  }
+
+  if (!userId) {
+    return <Empty />;
   }
 
   return (
