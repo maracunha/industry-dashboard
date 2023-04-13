@@ -3,7 +3,7 @@ import { Avatar, Card, Descriptions, Empty, Tooltip } from 'antd';
 
 import { useAssetsList } from '../../services/queries';
 import styles from './styles.module.css';
-import { optionsChartPie } from './chartsHelper';
+import { optionsChartGauge, optionsChartPie } from './chartsHelper';
 import Chart from '../../components/Chart';
 import { useUSerAvatar } from '../../hooks/useUserAvatar';
 
@@ -18,9 +18,12 @@ function Status() {
     return <Empty />;
   }
 
+  const pieOptions = optionsChartPie(asset.healthHistory);
+  const gaugeOptions = optionsChartGauge(asset.healthscore);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-8">
-      <div>
+      <div className="md:grid-span-1">
         <Card cover={<img alt="example" src={asset.image} />}>
           <Descriptions title={asset.name} column={1} className={styles.description}>
             <Descriptions.Item label="Model: ">{asset.model}</Descriptions.Item>
@@ -39,9 +42,13 @@ function Status() {
           </Descriptions>
         </Card>
       </div>
-      <div className="col-span-2">
+
+      <div className="md:col-span-2 md:gap-4">
         <Card>
-          <Chart options={optionsChartPie} />
+          <Chart options={pieOptions} />
+        </Card>
+        <Card>
+          <Chart options={gaugeOptions} />
         </Card>
       </div>
     </div>
