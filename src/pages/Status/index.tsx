@@ -1,9 +1,11 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Avatar, Card, Descriptions, Empty, Tooltip } from 'antd';
+import Title from 'antd/es/typography/Title';
+import AntLink from 'antd/es/typography/Link';
 
+import Chart from '../../components/Chart';
 import { useAssetsList } from '../../services/queries';
 import { optionsChartGauge, optionsChartPie } from './chartsHelper';
-import Chart from '../../components/Chart';
 import { useUSerAvatar } from '../../hooks/useUserAvatar';
 
 function Status() {
@@ -14,7 +16,18 @@ function Status() {
   const avatars = useUSerAvatar(asset?.assignedUserIds);
 
   if (!state || !asset) {
-    return <Empty />;
+    return (
+      <Empty
+        description={
+          <>
+            <Title level={4}>Choose an asset from dashboard panel</Title>
+            <Link to="/dashboard">
+              <AntLink>Back to Dashboard</AntLink>
+            </Link>
+          </>
+        }
+      ></Empty>
+    );
   }
 
   const pieOptions = optionsChartPie(asset.healthHistory);
