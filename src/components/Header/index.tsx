@@ -41,7 +41,7 @@ function Header() {
   };
 
   return (
-    <AntdHeader className="flex sticky top-0 bg-blue-700">
+    <AntdHeader className="flex sticky top-0 bg-blue-700 z-20">
       <span className="w-44">
         <a href="/dashboard">
           <Text className="text-white">{companyName}</Text>
