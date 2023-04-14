@@ -1,5 +1,5 @@
-import { useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Layout, Space, Typography } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
@@ -37,15 +37,14 @@ function Header() {
     }
     setUser(name);
     navigate('/dashboard');
-
   };
 
   return (
     <AntdHeader className="flex sticky top-0 bg-blue-700 z-20">
       <span className="w-44">
-        <a href="/dashboard">
+        <Link to="/dashboard">
           <Text className="text-white">{companyName}</Text>
-        </a>
+        </Link>
       </span>
       <div className="flex justify-between w-full">
         <span className="ml-8 text-white">{unitName}</span>
